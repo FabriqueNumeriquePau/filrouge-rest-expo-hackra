@@ -10,5 +10,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, (): void => {
-    console.log(`The application is listening on port http://localhost:${environment.PORT}`);
+    console.log(`The application is listening on port http://localhost:${PORT}`);
 });
