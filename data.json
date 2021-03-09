@@ -1,0 +1,47 @@
+{
+  "games": [
+    {
+      "dateDebut": "21/01/2021",
+      "heureDebut": "10:35:05",
+      "heureFin": "11:35:05",
+      "equipes": [
+        {
+          "equipeId": 1,
+          "score": 200,
+          "login": "test",
+          "passe": "test",
+          "joueurs": [
+            {
+              "nom": "Billon",
+              "prenom": "Pierre"
+            },
+            {
+              "nom": "Taillou",
+              "prenom": "James"
+            },
+            {
+              "nom": "Briano",
+              "prenom": "Angela"
+            }
+          ]
+        },
+        {
+          "equipeId": 2,
+          "score": 28,
+          "login": "test1",
+          "passe": "test1",
+          "joueurs": [
+            {
+              "nom": "Bioucy",
+              "prenom": "Maud"
+            },
+            {
+              "nom": "Milano",
+              "prenom": "Anna"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
