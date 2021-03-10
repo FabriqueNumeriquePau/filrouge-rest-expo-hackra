@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node dist/main.js",
+    "start:prod": "tsc && NODE_ENV=production node dist/main.js",
     "start:dev": "nodemon",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix"

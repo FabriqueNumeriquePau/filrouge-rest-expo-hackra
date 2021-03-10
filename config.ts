@@ -1,13 +1,13 @@
 import dotenv from 'dotenv';
 
 const dotenvConf = dotenv.config({
-    path: '.env'
+    path: process.env.NODE_ENV === 'production'
+    ? '.env'
+    : `.env.development`
 });
 
-console.log(dotenvConf);
-
 if (dotenvConf.error) {
-    throw new Error(dotenvConf?.error.message);
+    throw new Error(dotenvConf.error.message);
 }
 
 export const environment = {
