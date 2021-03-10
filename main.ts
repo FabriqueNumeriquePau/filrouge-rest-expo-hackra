@@ -1,6 +1,5 @@
 import express from 'express';
 import apiRouter from './routes/api';
-import { environment } from './config';
 
 const app = express();
 const PORT = process.env.PORT||'3000';
