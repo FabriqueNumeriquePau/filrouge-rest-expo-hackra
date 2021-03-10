@@ -14,6 +14,6 @@ export const environment = {
     HOST_DB: process.env.HOST_DB,
     PORT_DB: process.env.PORT_DB,
     USER_DB: process.env.USER_DB,
-    USER_PASSWORD: process.env.USER_PASSWORD,
+    PASSWORD_DB: process.env.PASSWORD_DB,
     DB_NAME: process.env.DB_NAME
 };
