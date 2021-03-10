@@ -12,6 +12,7 @@ if (dotenvConf.error) {
 
 export const environment = {
     HOST_DB: process.env.HOST_DB,
+    PORT_DB: process.env.PORT_DB,
     USER_DB: process.env.USER_DB,
     USER_PASSWORD: process.env.USER_PASSWORD,
     DB_NAME: process.env.DB_NAME
