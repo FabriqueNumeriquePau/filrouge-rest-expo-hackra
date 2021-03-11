@@ -4,18 +4,10 @@ import { environment } from './config';
 
 class Database {
     private connection: Connection | undefined;
-    private static intance: Database | undefined;
     private uri = `mongodb://${environment.HOST_DB}:${environment.PORT_DB}/${environment.DB_NAME}`;
+    private static instance: Database | undefined;
     private constructor() {
         this.initConnection();
-    }
-
-
-    static getInstance(): Database {
-        if (Database.intance === undefined) {
-            Database.intance = new Database();
-        }
-        return Database.intance;
     }
 
     private initConnection(): void {
@@ -30,6 +22,13 @@ class Database {
             console.error(err);
             process.exit(-1);
         });
+    }
+
+    static getInstance(): Database {
+        if (Database.instance === undefined) {
+            Database.instance = new Database();
+        }
+        return Database.instance;
     }
 }
 

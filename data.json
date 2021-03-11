@@ -1,43 +1,43 @@
 {
   "games": [
     {
-      "dateDebut": "21/01/2021",
-      "heureDebut": "10:35:05",
-      "heureFin": "11:35:05",
-      "equipes": [
+      "startDate": "21/01/2021",
+      "startTime": "10:35:05",
+      "endTime": "11:35:05",
+      "teams": [
         {
-          "equipeId": 1,
+          "teamId": 1,
           "score": 200,
-          "login": "test",
-          "passe": "test",
-          "joueurs": [
+          "username": "test",
+          "password": "test",
+          "players": [
             {
-              "nom": "Billon",
-              "prenom": "Pierre"
+              "name": "Billon",
+              "lastName": "Pierre"
             },
             {
-              "nom": "Taillou",
-              "prenom": "James"
+              "name": "Taillou",
+              "lastName": "James"
             },
             {
-              "nom": "Briano",
-              "prenom": "Angela"
+              "name": "Briano",
+              "lastName": "Angela"
             }
           ]
         },
         {
-          "equipeId": 2,
+          "teamId": 2,
           "score": 28,
-          "login": "test1",
-          "passe": "test1",
-          "joueurs": [
+          "username": "test1",
+          "password": "test1",
+          "players": [
             {
-              "nom": "Bioucy",
-              "prenom": "Maud"
+              "name": "Bioucy",
+              "lastName": "Maud"
             },
             {
               "nom": "Milano",
-              "prenom": "Anna"
+              "lastName": "Anna"
             }
           ]
         }

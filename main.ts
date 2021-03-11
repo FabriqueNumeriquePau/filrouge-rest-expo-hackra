@@ -1,6 +1,8 @@
 import express from 'express';
 import apiRouter from './routes/api';
+import Database from './Database';
 
+const database = Database.getInstance();
 const app = express();
 const PORT = process.env.PORT||'3000';
 
