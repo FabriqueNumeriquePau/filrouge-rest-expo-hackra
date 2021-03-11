@@ -4,6 +4,7 @@ import { environment } from './config';
 
 class Database {
     private connection: Connection | undefined;
+    // mongo "mongodb+srv://cluster-escape.vgivj.mongodb.net/myFirstDatabase" --username < username >
     private uri = `mongodb://${environment.HOST_DB}:${environment.PORT_DB}/${environment.DB_NAME}`;
     private static instance: Database | undefined;
     private constructor() {

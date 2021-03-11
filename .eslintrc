@@ -11,5 +11,6 @@
     ],
     "rules": {
         "semi":"warn",
+        "no-irregular-whitespace":"warn"
     }
 }
