@@ -4,14 +4,14 @@ import { environment } from './configs/config';
 
 class Database {
     private connection: Connection | undefined;
-    // mongo "mongodb+srv://cluster-escape.vgivj.mongodb.net/myFirstDatabase" --username < username >
-    private uri = `mongodb://${environment.HOST_DB}:${environment.PORT_DB}/${environment.DB_NAME}`;
+    private uri = `mongodb+srv://${environment.HOST_DB}/${environment.DB_NAME}`;
     private static instance: Database | undefined;
     private constructor() {
         this.initConnection();
     }
 
     private initConnection(): void {
+        console.log(this.uri);
         mongoose.connect(this.uri, { 
             useNewUrlParser: true, 
             useUnifiedTopology: true, 

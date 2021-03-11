@@ -9,7 +9,6 @@ const dotenvConf = dotenv.config({
 if (dotenvConf.error) {
     throw new Error(dotenvConf.error.message);
 }
-
 export const environment = {
     HOST_DB: process.env.HOST_DB,
     PORT_DB: process.env.PORT_DB,
