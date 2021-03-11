@@ -11,7 +11,6 @@ class Database {
     }
 
     private initConnection(): void {
-        console.log(this.uri);
         mongoose.connect(this.uri, { 
             useNewUrlParser: true, 
             useUnifiedTopology: true, 
