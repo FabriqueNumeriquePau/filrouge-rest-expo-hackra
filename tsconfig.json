@@ -7,7 +7,7 @@
         "strictFunctionTypes": true,
         "noImplicitReturns": true,
         "moduleResolution": "node",
-        "sourceMap": true,
+        "sourceMap": false,
         "outDir": "dist"
     },
     "lib": [

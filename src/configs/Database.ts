@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { Connection } from 'mongoose';
-import { environment } from './configs/config';
+import { environment } from './config';
 
 class Database {
     private connection: Connection | undefined;
