@@ -4,7 +4,7 @@ import { environment } from './config';
 
 class Database {
     private connection: Connection | undefined;
-    private readonly uri = `mongodb+srv://${environment.HOST_DB}/${environment.DB_NAME}`;
+    private readonly uri = `mongodb://${environment.HOST_DB}:${environment.PORT_DB}/${environment.DB_NAME}`;
     private static instance: Database | undefined;
     private constructor() {
         this.initConnection();

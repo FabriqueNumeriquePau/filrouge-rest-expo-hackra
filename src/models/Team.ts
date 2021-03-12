@@ -20,5 +20,3 @@ export const TeamSchema = new Schema({
     players: [PlayerSchema]
     
 });
-
-export const TeamModel: Model<Team> = model<Team>('Team', TeamSchema);

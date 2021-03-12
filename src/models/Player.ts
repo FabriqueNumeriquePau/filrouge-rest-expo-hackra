@@ -11,5 +11,3 @@ export const PlayerSchema = new Schema({
     name: {type: String },
     lastName: {type: String }
 });
-
-export const PlayerModel: Model<Player> = model<Player>('Player', PlayerSchema);
