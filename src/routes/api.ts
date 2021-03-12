@@ -1,10 +1,10 @@
-import { Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import authRouter from './auth';
 import gameRouter from './game';
 
 const apiRouter = Router();
 
-apiRouter.use((req, res, next) => {
+apiRouter.use((req: Request, res: Response, next: NextFunction) => {
     console.log(`[${new Date().toISOString()}]: ${req.method} -> ${req.url}`);
     next();
 });

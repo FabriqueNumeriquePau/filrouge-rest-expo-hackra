@@ -12,7 +12,7 @@ export interface Team extends Document {
 export const TeamSchema = new Schema({
     score: {type: Number},
     username: {type: String, 
-        index: true, 
+        index: true,
         unique: true,
         require: true
     },

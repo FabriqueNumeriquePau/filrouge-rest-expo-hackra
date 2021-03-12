@@ -1,9 +1,9 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
 import { Game, GameModel } from '../models/Game';
 
 const gameRouter = Router();
 
-gameRouter.get('/', async (req, res) => {
+gameRouter.get('/', async (req: Request, res: Response) => {
     try {
         const games = await GameModel.find();
         res.json(games);
@@ -14,7 +14,7 @@ gameRouter.get('/', async (req, res) => {
     }
 });
 
-gameRouter.post('/', (req, res) => {
+gameRouter.post('/', (req: Request, res: Response) => {
     try {
         const model = new GameModel(req.body);
         model.save();
