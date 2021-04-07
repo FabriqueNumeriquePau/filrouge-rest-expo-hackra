@@ -6,35 +6,35 @@ const teamRouter = Router();
 const teamController = new TeamController();
 teamRouter.get('/game/:gameId', async (req: Request, res: Response): Promise<void> => {
     try {
-        const teams = await teamController.getAllTeamsByGame(req.params.gameId);
+        const teams = await teamController.getTeam(req.params.gameId);
         res.json(teams);
     }
-    catch(error) {
+    catch (error) {
         res.status(500).send(error);
     }
 });
 
 
-teamRouter.get('/:teamId', async (req: Request, res: Response): Promise<void> => {
-    const { teamId } = req.params; 
+teamRouter.get('/game/:gameId/team/:teamId', async (req: Request, res: Response): Promise<void> => {
+    const { teamId, gameId } = req.params;
     try {
-        const team = await teamController.getTeamById(teamId);
+        const team = await teamController.getTeamById(gameId, teamId);
         res.json(team);
     }
-    catch(error) {
+    catch (error) {
         res.status(500).send(error);
     }
 });
 
 
-teamRouter.post('/game/:gameId', async (req: Request, res: Response): Promise<void>  => {
+teamRouter.post('/game/:gameId', async (req: Request, res: Response): Promise<void> => {
     const { gameId } = req.params;
     const team: Team = req.body as Team;
     try {
         const resultat = await teamController.addTeamsToGame(gameId, team);
         res.json(resultat);
     }
-    catch(error) {
+    catch (error) {
         res.status(500).send(error);
     }
 });

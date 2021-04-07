@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
+import checkJwt from '../middlewares/jwt';
+import { adminRole } from '../middlewares/roles';
 import authRouter from './auth';
 import gameRouter from './game';
 import playerRouter from './player';
@@ -12,7 +14,7 @@ apiRouter.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 apiRouter.use('/auth', authRouter);
-apiRouter.use('/game', gameRouter);
+apiRouter.use('/game', checkJwt, adminRole, gameRouter);
 apiRouter.use('/team', teamRouter);
 apiRouter.use('/player', playerRouter);
 
