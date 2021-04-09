@@ -1,6 +1,7 @@
 import express from 'express';
 import apiRouter from './routes/api';
 import Database from './configs/Database';
+import { environment } from './configs/config';
 
 const database = Database.getInstance();
 
@@ -16,5 +17,5 @@ app.get('/', (req, res) => {
 app.use('/api', apiRouter);
 
 app.listen(PORT, (): void => {
-    console.log(`The application is listening on port http://localhost:${PORT}`);
+    console.log(`The application is listening on port http://${environment.API_HOST}:${PORT}`);
 });
