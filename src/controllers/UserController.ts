@@ -2,6 +2,7 @@ import { hash, verify } from "argon2";
 import { AuthInput, AuthOutput, Payload, User, UserModel } from "../models/User";
 import { sign } from 'jsonwebtoken';
 import { environment } from "../configs/config";
+import { ForbiddenError } from "../exceptions/httpExceptions";
 
 class UserController {
 
@@ -27,10 +28,12 @@ class UserController {
     async signin(auth: AuthInput): Promise<AuthOutput> {
         const userDb = await this.model.findOne({ username: auth.username });
         if (!userDb) {
-            throw new Error('Forbiden');
+            throw new ForbiddenError('Forbiden');
         }
+
         if (await verify(userDb.password, auth.password)) {
             const payload = {
+                userId: userDb.id,
                 createdAt: userDb.createdAt,
                 role: userDb.role
             } as Payload;

@@ -7,7 +7,6 @@ const userController = new UserController();
 
 authRouter.post('/signup', async (req: Request, res: Response) => {
     const userRequest = req.body as User;
-    console.log(userRequest);
     try {
         const userCreated = await userController.signup(userRequest);
         res.json(userCreated);
@@ -27,7 +26,7 @@ authRouter.post('/signin', async (req: Request, res: Response) => {
     catch (err) {
         console.log(err);
 
-        res.sendStatus(401)
+        res.sendStatus(401);
     }
 });
 

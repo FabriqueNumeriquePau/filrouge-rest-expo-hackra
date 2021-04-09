@@ -27,6 +27,7 @@ export interface User extends Document {
 export interface Payload {
     createdAt: Date;
     role: Role;
+    userId: string;
 }
 
 export const UserSchema = new Schema({
