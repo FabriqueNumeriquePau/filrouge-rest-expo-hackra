@@ -1,0 +1,20 @@
+[
+  {
+    "state": "waiting",
+    "startDate": "21-01-2021",
+    "startTime": "10:35:05",
+    "endTime": "11:35:05",
+    "teams": [
+      {
+        "score": 0,
+        "user": "6070483a65875c8279aa5311",
+        "players": [
+          {
+            "name": "toto",
+            "lastName": "toto"
+          }
+        ]
+      }
+    ]
+  }
+]
