@@ -12,10 +12,11 @@ function checkJwt(req: Request, res: Response, next: NextFunction): void {
         next();
     }
     const authorization = req.headers.authorization;
-    if (authorization == undefined || authorization === '') {
+    if (authorization === undefined || authorization === '') {
         res.status(401).send({
             error: 'Jwt is missing'
         });
+        return;
     }
     const token = authorization.split(' ')[1];
 
@@ -28,6 +29,7 @@ function checkJwt(req: Request, res: Response, next: NextFunction): void {
         res.status(401).send({
             error: 'JsonWebTokenError: invalid token'
         });
+        return;
     }
 }
 

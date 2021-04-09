@@ -5,6 +5,7 @@ export function adminRole(req: Request, res: Response, next: NextFunction): void
     if (req.user) {
         if (req.user.role !== Role.Admin) {
             res.sendStatus(403);
+            return;
         }
         next();
     }
@@ -17,4 +18,5 @@ export function teamRole(req: Request, res: Response, next: NextFunction): void 
         }
     }
     res.status(403);
+    return;
 }
