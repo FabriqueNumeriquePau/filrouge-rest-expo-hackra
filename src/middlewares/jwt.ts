@@ -12,7 +12,7 @@ function checkJwt(req: Request, res: Response, next: NextFunction): void {
         next();
     }
     const authorization = req.headers.authorization;
-    if (!authorization) {
+    if (authorization == undefined || authorization === '') {
         res.status(401).send({
             error: 'Jwt is missing'
         });
