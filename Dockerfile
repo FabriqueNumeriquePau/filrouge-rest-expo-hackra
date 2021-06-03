@@ -1,0 +1,8 @@
+FROM node:14.16.0-alpine
+WORKDIR /app
+COPY package.json package.json
+RUN npm i
+COPY . .
+RUN chown -R node:node /app
+USER node
+RUN npm run build

@@ -6,7 +6,7 @@ import { environment } from './configs/config';
 const database = Database.getInstance();
 
 const app = express();
-const PORT = process.env.PORT || '3000';
+const PORT = environment.API_PORT
 
 app.use(express.json());
 

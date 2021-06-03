@@ -11,17 +11,17 @@ class Database {
     }
 
     private initConnection(): void {
-        mongoose.connect(this.uri, { 
-            useNewUrlParser: true, 
-            useUnifiedTopology: true, 
+        mongoose.connect(this.uri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
             authSource: 'admin',
-            auth: { user: environment.USER_DB, password: environment.PASSWORD_DB}
+            auth: { user: environment.USER_DB, password: environment.PASSWORD_DB }
         })
-        .then(c => this.connection = c.connection)
-        .catch(err => {
-            console.error(err);
-            process.exit(-1);
-        });
+            .then(c => this.connection = c.connection)
+            .catch(err => {
+                console.error(err);
+                process.exit(-1);
+            });
     }
 
     static getInstance(): Database {
