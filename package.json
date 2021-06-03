@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "tsc && cross-env NODE_ENV=production node dist/main.js",
+    "docker:dev": "docker-compose --env-file .env.development up",
+    "docker:dev:build": "npm run docker:dev -- --build -V",
     "start:dev": "cross-env NODE_ENV=development node --trace-warnings dist/main.js",
     "watch": "nodemon",
     "lint": "eslint . --ext .ts",
