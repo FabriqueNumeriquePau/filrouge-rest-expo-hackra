@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import { environment } from "../configs/config";
 import { Payload } from "../models/User";
+import { ApiError, HttpResponse } from "../utils/http.util";
 
 
 
@@ -13,9 +14,8 @@ function checkJwt(req: Request, res: Response, next: NextFunction): void {
     }
     const authorization = req.headers.authorization;
     if (authorization === undefined || authorization === '') {
-        res.status(401).send({
-            error: 'Jwt is missing'
-        });
+        const error = new ApiError(HttpResponse.FORBIDDEN, 'Jwt', 'Jwt is missing');
+        res.status(error.code).json(error);
         return;
     }
     const token = authorization.split(' ')[1];
@@ -26,9 +26,8 @@ function checkJwt(req: Request, res: Response, next: NextFunction): void {
         next();
     }
     catch (err) {
-        res.status(401).send({
-            error: 'JsonWebTokenError: invalid token'
-        });
+        const error = new ApiError(HttpResponse.FORBIDDEN, 'Jwt', 'invalid token');
+        res.status(error.code).json(error);
         return;
     }
 }

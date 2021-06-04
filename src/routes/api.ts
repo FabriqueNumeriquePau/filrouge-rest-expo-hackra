@@ -5,17 +5,8 @@ import authRouter from './auth';
 import gameRouter from './game';
 import playerRouter from './player';
 import teamRouter from './team';
-import swaggerUi from 'swagger-ui-express';
 
 const apiRouter = Router();
-apiRouter.use('/doc', swaggerUi.serve);
-
-apiRouter.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    if (err) {
-        console.log('err');
-
-    }
-});
 
 apiRouter.use((req: Request, res: Response, next: NextFunction) => {
     console.log(`[${new Date().toISOString()}]: ${req.method} -> ${req.url}`);

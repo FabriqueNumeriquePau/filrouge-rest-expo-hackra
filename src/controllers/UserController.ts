@@ -3,6 +3,7 @@ import { AuthInput, AuthOutput, Payload, User, UserModel } from "../models/User"
 import { sign } from 'jsonwebtoken';
 import { environment } from "../configs/config";
 import { ForbiddenError } from "../exceptions/httpExceptions";
+import { ApiError, HttpResponse } from "../utils/http.util";
 
 class UserController {
 
@@ -13,12 +14,12 @@ class UserController {
     async signup(user: User): Promise<User> {
         const userDb = await this.model.findOne({ username: user.username });
         if (userDb) {
-            throw new Error(`${user.username} already exists`);
+            throw new ApiError(HttpResponse.BAD_REQUEST, UserController.name, `${user.username} already exists`);
         }
 
         const userModel = new UserModel(user);
         if (userModel.errors) {
-            throw new Error(userModel.errors.message);
+            throw new ApiError(HttpResponse.BAD_REQUEST, UserController.name, userModel.errors.message);
         }
         userModel.createdAt = new Date();
         userModel.password = await hash(user.password);
@@ -28,7 +29,7 @@ class UserController {
     async signin(auth: AuthInput): Promise<AuthOutput> {
         const userDb = await this.model.findOne({ username: auth.username });
         if (!userDb) {
-            throw new ForbiddenError('Forbiden');
+            throw new ApiError(HttpResponse.FORBIDDEN, UserController.name, `Incorrecte login`);
         }
 
         if (await verify(userDb.password, auth.password)) {
@@ -37,12 +38,13 @@ class UserController {
                 createdAt: userDb.createdAt,
                 role: userDb.role
             } as Payload;
+            const { password, ...account } = userDb;
             return {
-                user: userDb,
+                user: account,
                 jwt: sign(payload, environment.JWT_SECRET, { expiresIn: environment.JWT_EXPIRE })
             } as AuthOutput;
         }
-        throw new Error('Forbiden');
+        throw new ApiError(HttpResponse.FORBIDDEN, UserController.name, `Incorrecte login`);
     }
 }
 

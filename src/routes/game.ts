@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { Game, GameModel } from '../models/Game';
+import { ApiError } from '../utils/http.util';
 
 const gameRouter = Router();
 
@@ -8,9 +9,11 @@ gameRouter.get('/', async (req: Request, res: Response) => {
         const games = await GameModel.find();
         res.json(games);
     }
-    catch(error) {
-        console.log(error);
-        res.sendStatus(500);
+    catch (error) {
+        if (error instanceof ApiError) {
+            res.status(error.code).json(error);
+        }
+        res.status(500).send(error.toString());
     }
 });
 
@@ -20,9 +23,11 @@ gameRouter.post('/', (req: Request, res: Response) => {
         model.save();
         res.status(200).json(model);
     }
-    catch(error) {
-        console.log(error);
-        res.status(500).json(error);
+    catch (error) {
+        if (error instanceof ApiError) {
+            res.status(error.code).json(error);
+        }
+        res.status(500).send(error.toString());
     }
 });
 

@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import TeamController from '../controllers/TeamController';
 import { Team } from '../models/Team';
+import { ApiError } from '../utils/http.util';
 
 const teamRouter = Router();
 const teamController = new TeamController();
@@ -22,7 +23,10 @@ teamRouter.get('/game/:gameId/team/:teamId', async (req: Request, res: Response)
         res.json(team);
     }
     catch (error) {
-        res.status(500).send(error);
+        if (error instanceof ApiError) {
+            res.status(error.code).json(error);
+        }
+        res.status(500).send(error.toString());
     }
 });
 
@@ -35,7 +39,10 @@ teamRouter.post('/game/:gameId', async (req: Request, res: Response): Promise<vo
         res.json(resultat);
     }
     catch (error) {
-        res.status(500).send(error);
+        if (error instanceof ApiError) {
+            res.status(error.code).json(error);
+        }
+        res.status(500).send(error.toString());
     }
 });
 

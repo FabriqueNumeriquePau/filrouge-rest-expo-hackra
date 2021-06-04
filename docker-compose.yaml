@@ -27,8 +27,8 @@ services:
     container_name: ${API_NAME}-db
     image: mongo
     restart: always
-    # ports:
-    #   - ${PORT_DB}:${PORT_DB}
+    ports:
+      - ${PORT_DB}:${PORT_DB}
     volumes:
       - db:/data/db
     environment:

@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import PlayerController from '../controllers/PlayerController';
 import { Player } from '../models/Player';
+import { ApiError } from '../utils/http.util';
 
 const playerRouter = Router();
 const playerController = new PlayerController();
@@ -12,11 +13,14 @@ playerRouter.post('/game/:gameId/team/:teamId', async (req: Request, res: Respon
             teamId, player
         );
         console.log(resultat);
-        
+
         res.json(resultat);
     }
-    catch(error) {
-        res.status(500).send(error);
+    catch (error) {
+        if (error instanceof ApiError) {
+            res.status(error.code).json(error);
+        }
+        res.status(500).send(error.toString());
     }
 });
 

@@ -2,6 +2,7 @@ import { ObjectId } from "bson";
 import { Aggregate, Query } from "mongoose";
 import { Game, GameModel } from "../models/Game";
 import { Team } from "../models/Team";
+import { ApiError, HttpResponse } from "../utils/http.util";
 
 class TeamController {
 
@@ -11,10 +12,14 @@ class TeamController {
     async getTeam(id: string): Promise<Team[]> {
         try {
             const game = await this.model.findById(id);
+
+            if (!game) {
+                throw new ApiError(HttpResponse.NOT_FOUND, TeamController.name, `Game #${id} not found`);
+            }
             return game.teams;
         }
-        catch {
-            throw new Error(`Game #${id} not found`);
+        catch (err) {
+            throw new ApiError(HttpResponse.INTERNAL_ERROR, TeamController.name, err.toString());
         }
     }
 
@@ -23,11 +28,11 @@ class TeamController {
             const game = await this.model.findById(gameId);
             const team = game.teams.find(t => t.id === teamId);
             if (!team) {
-                throw new Error(`Team #${teamId} not found`);
+                throw new ApiError(HttpResponse.NOT_FOUND, TeamController.name, `Team #${teamId} not found`);
             }
         }
-        catch {
-            throw new Error(`Game #${gameId} not found`);
+        catch (err) {
+            throw new ApiError(HttpResponse.INTERNAL_ERROR, TeamController.name, err.toString());
         }
 
     }

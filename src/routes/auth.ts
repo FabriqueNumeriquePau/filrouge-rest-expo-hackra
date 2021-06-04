@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express';
 import UserController from '../controllers/UserController';
 import { AuthInput, User } from '../models/User';
+import { ApiError } from '../utils/http.util';
 
 const authRouter = Router();
 const userController = new UserController();
@@ -12,8 +13,10 @@ authRouter.post('/signup', async (req: Request, res: Response) => {
         res.json(userCreated);
     }
     catch (error) {
-        console.log(error);
-        res.send(500);
+        if (error instanceof ApiError) {
+            res.status(error.code).json(error);
+        }
+        res.status(500).send(error.toString());
     }
 });
 
@@ -23,10 +26,11 @@ authRouter.post('/signin', async (req: Request, res: Response) => {
         const resultAuth = await userController.signin(auth);
         res.json(resultAuth);
     }
-    catch (err) {
-        console.log(err);
-
-        res.sendStatus(401);
+    catch (error) {
+        if (error instanceof ApiError) {
+            res.status(error.code).json(error);
+        }
+        res.status(500).send(error.toString());
     }
 });
 
