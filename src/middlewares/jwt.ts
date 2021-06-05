@@ -7,14 +7,12 @@ import { ApiError, HttpResponse } from "../utils/http.util";
 
 
 function checkJwt(req: Request, res: Response, next: NextFunction): void {
-    console.log('Jwt ...');
-
     if (req.user) {
         next();
     }
     const authorization = req.headers.authorization;
     if (authorization === undefined || authorization === '') {
-        const error = new ApiError(HttpResponse.FORBIDDEN, 'Jwt', 'Jwt is missing');
+        const error = new ApiError(HttpResponse.FORBIDDEN, checkJwt.name, 'Jwt is missing');
         res.status(error.code).json(error);
         return;
     }
@@ -26,7 +24,7 @@ function checkJwt(req: Request, res: Response, next: NextFunction): void {
         next();
     }
     catch (err) {
-        const error = new ApiError(HttpResponse.FORBIDDEN, 'Jwt', 'invalid token');
+        const error = new ApiError(HttpResponse.FORBIDDEN, checkJwt.name, 'invalid token');
         res.status(error.code).json(error);
         return;
     }

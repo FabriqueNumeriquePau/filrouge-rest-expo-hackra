@@ -5,7 +5,7 @@ import { ApiError, HttpResponse } from "../utils/http.util";
 export function adminRole(req: Request, res: Response, next: NextFunction): void {
     if (req.user) {
         if (req.user.role !== Role.Admin) {
-            const error = new ApiError(HttpResponse.FORBIDDEN, 'Role', 'Forbidden');
+            const error = new ApiError(HttpResponse.FORBIDDEN, adminRole.name, 'Forbidden');
             res.status(error.code).json(error);
             return;
         }
@@ -19,7 +19,7 @@ export function teamRole(req: Request, res: Response, next: NextFunction): void 
             next();
         }
     }
-    const error = new ApiError(HttpResponse.FORBIDDEN, 'Role', 'Forbidden');
+    const error = new ApiError(HttpResponse.FORBIDDEN, teamRole.name, 'Forbidden');
     res.status(error.code).json(error);
     return;
 }

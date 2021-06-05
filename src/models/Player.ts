@@ -1,4 +1,4 @@
-import { Document, model, Model, Number, Schema } from "mongoose";
+import { Document, Schema } from "mongoose";
 
 export interface Player extends Document {
     playerId: number;
@@ -7,7 +7,7 @@ export interface Player extends Document {
 }
 
 export const PlayerSchema = new Schema({
-    playerId: {type: Number, require: true},
-    name: {type: String },
-    lastName: {type: String }
+    playerId: { type: Number, require: true },
+    name: { type: String },
+    lastName: { type: String }
 });

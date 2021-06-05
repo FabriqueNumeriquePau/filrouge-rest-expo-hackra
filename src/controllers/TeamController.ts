@@ -14,12 +14,12 @@ class TeamController {
             const game = await this.model.findById(id);
 
             if (!game) {
-                throw new ApiError(HttpResponse.NOT_FOUND, TeamController.name, `Game #${id} not found`);
+                throw new ApiError(HttpResponse.NOT_FOUND, `${TeamController.name}.${this.getTeam.name}`, `Game #${id} not found`);
             }
             return game.teams;
         }
         catch (err) {
-            throw new ApiError(HttpResponse.INTERNAL_ERROR, TeamController.name, err.toString());
+            throw new ApiError(HttpResponse.INTERNAL_ERROR, `${TeamController.name}.${this.getTeam.name}`, err.toString());
         }
     }
 
@@ -28,11 +28,11 @@ class TeamController {
             const game = await this.model.findById(gameId);
             const team = game.teams.find(t => t.id === teamId);
             if (!team) {
-                throw new ApiError(HttpResponse.NOT_FOUND, TeamController.name, `Team #${teamId} not found`);
+                throw new ApiError(HttpResponse.NOT_FOUND, `${TeamController.name}.${this.getTeamById.name}`, `Team #${teamId} not found`);
             }
         }
         catch (err) {
-            throw new ApiError(HttpResponse.INTERNAL_ERROR, TeamController.name, err.toString());
+            throw new ApiError(HttpResponse.INTERNAL_ERROR, `${TeamController.name}.${this.getTeamById.name}`, err.toString());
         }
 
     }
