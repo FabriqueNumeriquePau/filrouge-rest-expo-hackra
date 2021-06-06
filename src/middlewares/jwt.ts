@@ -24,7 +24,7 @@ function checkJwt(req: Request, res: Response, next: NextFunction): void {
         next();
     }
     catch (err) {
-        const error = new ApiError(HttpResponse.FORBIDDEN, checkJwt.name, 'invalid token');
+        const error = new ApiError(HttpResponse.FORBIDDEN, checkJwt.name, 'Invalid token');
         res.status(error.code).json(error);
         return;
     }

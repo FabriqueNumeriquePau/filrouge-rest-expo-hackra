@@ -11,7 +11,7 @@ export interface Team extends Document {
 
 export const TeamSchema = new Schema({
     score: { type: Number },
-    user: { type: ObjectId },
+    userId: { type: ObjectId },
     players: [PlayerSchema]
 
 });

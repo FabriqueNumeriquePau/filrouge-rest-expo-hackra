@@ -1,0 +1,41 @@
+version: "3.1"
+
+volumes:
+  db:
+
+networks:
+  network:
+    name: "net"
+
+services:
+  api:
+    container_name: ${API_NAME}
+    build:
+      context: "."
+      dockerfile: "./Dockerfile.dev"
+    command: ["npm", "run", "start:dev"]
+    volumes:
+      - .:/app
+    restart: always
+    ports:
+      - ${API_PORT}:${API_PORT}
+    environment:
+      - HOST_DB=db
+    networks:
+      - network
+    depends_on:
+      - db
+
+  db:
+    container_name: ${API_NAME}-db
+    image: mongo
+    restart: always
+    ports:
+      - ${PORT_DB}:${PORT_DB}
+    volumes:
+      - db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${USER_DB}
+      MONGO_INITDB_ROOT_PASSWORD: ${PASSWORD_DB}
+    networks:
+      - network

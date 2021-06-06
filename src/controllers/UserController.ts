@@ -23,7 +23,8 @@ class UserController {
         }
         userModel.createdAt = new Date();
         userModel.password = await hash(user.password);
-        return await userModel.save();
+        const { password, ...acount } = await userModel.save();
+        return acount as User;
     }
 
     async signin(auth: AuthInput): Promise<AuthOutput> {

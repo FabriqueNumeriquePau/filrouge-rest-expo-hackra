@@ -7,7 +7,7 @@ const teamRouter = Router();
 const teamController = new TeamController();
 teamRouter.get('/game/:gameId', async (req: Request, res: Response): Promise<void> => {
     try {
-        const teams = await teamController.getTeam(req.params.gameId);
+        const teams = await teamController.findByGame(req.params.gameId);
         res.json(teams);
     }
     catch (error) {
@@ -19,7 +19,7 @@ teamRouter.get('/game/:gameId', async (req: Request, res: Response): Promise<voi
 teamRouter.get('/game/:gameId/team/:teamId', async (req: Request, res: Response): Promise<void> => {
     const { teamId, gameId } = req.params;
     try {
-        const team = await teamController.getTeamById(gameId, teamId);
+        const team = await teamController.findById(gameId, teamId);
         res.json(team);
     }
     catch (error) {

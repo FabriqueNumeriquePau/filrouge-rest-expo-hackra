@@ -1,0 +1,49 @@
+version: "3.1"
+
+volumes:
+  db:
+
+networks:
+  network:
+    name: "net"
+
+services:
+  reverse_proxy:
+    container_name: ${API_NAME}-proxy
+    image: nginx:stable-alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    networks:
+      - network
+    depends_on:
+      - api
+
+  api:
+    container_name: ${API_NAME}
+    build:
+      context: "."
+      dockerfile: "Dockerfile.prod"
+    command: ["npm", "run", "start:prod"]
+    restart: always
+    ports:
+      - ${API_PORT}:${API_PORT}
+    environment:
+      - HOST_DB=db
+    networks:
+      - network
+    depends_on:
+      - db
+
+  db:
+    container_name: ${API_NAME}-db
+    image: mongo
+    restart: always
+    volumes:
+      - db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${USER_DB}
+      MONGO_INITDB_ROOT_PASSWORD: ${PASSWORD_DB}
+    networks:
+      - network
