@@ -1,7 +1,5 @@
 import dotenv from 'dotenv';
 
-console.log(process.env.NODE_ENV);
-
 
 const dotenvConf = dotenv.config({
     path: process.env.NODE_ENV === 'production'
