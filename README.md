@@ -6,7 +6,7 @@ Renommer le fichier `.env.example` en `.env` pour la production ou `.env.develop
 
 Assurez vous que tout est correcte
 
-### Lancement
+### Lancement
 
 Installer les dépendances: `npm i`
 
