@@ -27,4 +27,4 @@ Vous pouvez lancer l'api avec docker:
  ou
  `npm run docker:prod`
 
-> L'exécution en production comprend un conteneur nginx qui fais office de reverse-proxy
+> L'exécution en production comprend un conteneur nginx qui fait office de reverse-proxy
